@@ -38,7 +38,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
             logger.info("登录成功");
 
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(Result.newSuccess(authentication,ApiCode.LOGIN_SUCCESSFULLY)));
+            response.getWriter().write(objectMapper.writeValueAsString(Result.newSuccess(authentication,ApiCode.Public_SUCCESSFULLY)));
 
 
     }

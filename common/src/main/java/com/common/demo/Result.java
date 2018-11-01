@@ -5,18 +5,17 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Result<T> implements Serializable {
-    private int code;
     private String message;
-    private T object;
+    private T data;
     private List<T> listObject;
-    private Exception exception;
     private String Token;
+    private int status;
     /**
      * 接口调用成功，不需要返回对象
      */
     public static <T> Result<T> newSuccess() {
         Result<T> result = new Result<T>();
-        result.setCode(ApiCode.Public_SUCCESSFULLY);
+        result.setStatus(ApiCode.Public_SUCCESSFULLY);
         return result;
     }
     /**
@@ -24,8 +23,8 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> newSuccess(T object) {
         Result<T> result = new Result<T>();
-        result.setObject(object);
-        result.setCode(ApiCode.Public_SUCCESSFULLY);
+        result.setData(object);
+        result.setStatus(ApiCode.Public_SUCCESSFULLY);
         return result;
     }
     /**
@@ -34,7 +33,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> newSuccess(List<T> object) {
         Result<T> result = new Result<T>();
         result.setListObject(object);
-        result.setCode(ApiCode.Public_SUCCESSFULLY);
+        result.setStatus(ApiCode.Public_SUCCESSFULLY);
         return result;
     }
     /**
@@ -43,8 +42,8 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> newSuccess_token(T object, String token) {
         Result<T> result = new Result<T>();
         result.setToken(token);
-        result.setObject(object);
-        result.setCode(ApiCode.Public_SUCCESSFULLY);
+        result.setData(object);
+        result.setStatus(ApiCode.Public_SUCCESSFULLY);
         return result;
     }
 
@@ -53,7 +52,7 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> newSuccess(ApiCode code) {
         Result<T> result = new Result<T>();
-        result.setCode(code);
+        result.setStatus(code);
         return result;
     }
 
@@ -62,8 +61,14 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> newSuccess(T object, ApiCode code) {
         Result<T> result = new Result<T>();
-        result.setCode(code);
-        result.setObject(object);
+        result.setStatus(code);
+        result.setData(object);
+        return result;
+    }
+    public static <T> Result<T> newSuccess(String token, ApiCode code) {
+        Result<T> result = new Result<T>();
+        result.setStatus(code);
+        result.setToken(token);
         return result;
     }
 
@@ -72,7 +77,7 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> newFailure(ApiCode code) {
         Result<T> result = new Result<T>();
-        result.setCode(code);
+        result.setStatus(code);
         return result;
     }
 
@@ -82,25 +87,31 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> newFailure(Exception e,ApiCode code) {
         Result<T> result = new Result<T>();
-        result.setException(e);
-        result.setCode(code);
+        result.setMessage(e.getMessage());
+        result.setStatus(code);
+        return result;
+    }
+    public static <T> Result<T> newFailure(String errormessage) {
+        Result<T> result = new Result<T>();
+        result.setMessage(errormessage);
+        result.setStatus(500);
         return result;
     }
 
     public boolean hasObject() {
-        return code == 0 && object != null;
+        return status== 200 && data != null;
     }
 
-    public boolean hasException() {
-        return exception != null;
-    }
 
     public int getCode() {
-        return code;
+        return status;
     }
 
-    public void setCode(ApiCode code) {
-        this.code = code.getValue();
+    public void setStatus(int code) {
+        this.status = code;
+    }
+    public void setStatus(ApiCode code) {
+        this.status = code.getValue();
         this.message=code.getMessage();
     }
     public String getMessage() {
@@ -111,21 +122,15 @@ public class Result<T> implements Serializable {
     }
 
 
-    public T getObject() {
-        return object;
+    public T getData() {
+        return data;
     }
 
-    public void setObject(T object) {
-        this.object = object;
+    public void setData(T data) {
+        this.data = data;
     }
 
-    public Exception getException() {
-        return exception;
-    }
 
-    public void setException(Exception exception) {
-        this.exception = exception;
-    }
     public String getToken() {
         return Token;
     }

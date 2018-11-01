@@ -1,12 +1,12 @@
 package com.common.demo;
 
 public enum ApiCode {
-    Public_SUCCESSFULLY(0) {
+    Public_SUCCESSFULLY(200) {
         public String getMessage() {
             return "调用接口成功!";
         }
     },
-    Public_Error(1) {
+    Public_Error(400) {
         public String getMessage() {
             return "调用接口失败!";
         }
@@ -67,14 +67,14 @@ public enum ApiCode {
             return "注册成功!";
         }
     },
-    LOGIN_SUCCESSFULLY(8012) {
-        public String getMessage() {
-            return "登录成功!";
-        }
-    },
     NO_AUTHORITY(8013) {
         public String getMessage() {
             return "无权限访问该接口";
+        }
+    },
+    LOGOUT_SUCCESSFULLY(8014) {
+        public String getMessage() {
+            return "退出成功";
         }
     };
 

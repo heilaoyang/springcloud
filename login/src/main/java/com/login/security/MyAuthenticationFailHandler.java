@@ -37,7 +37,7 @@ public class MyAuthenticationFailHandler extends SimpleUrlAuthenticationFailureH
             response.setStatus(500);
             //将 登录失败 信息打包成json格式返回
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(Result.newFailure(ApiCode.USERNAME_OR_PASSWORD_ERROR)));
+            response.getWriter().write(objectMapper.writeValueAsString(Result.newFailure("账号或密码错误，请重新输入")));
 
     }
 }

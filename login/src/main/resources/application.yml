@@ -21,18 +21,18 @@ spring:
         useGlobalDataSourceStat: true
         username: jzdev1
         validationQuery: SELECT 1 FROM DUAL
-#    redis:
-#      database: 0
-#      host: 118.126.91.137
-#      port: 6379
-#      password: a66666666
-#      jedis:
-#        pool:
-#          max-active: 10
-#          max-wait: -1
-#          max-idle: 8
-#          min-idle: 0
-#      timeout: 10000
+    redis:
+      database: 0
+      host: 118.126.91.137
+      port: 6379
+      password: a66666666
+      jedis:
+        pool:
+          max-active: 10
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
+      timeout: 10000
 #    thymeleaf:
 #      cache: false
 #      prefix: classpath:/templates/
@@ -86,12 +86,12 @@ security:
 
 
 jwt:
-  header: Authorization
    secret: mySecret
-   expiration: 10
+   expiration: 259200
    tokenHead: Bearer
+   header: Authorization
    route:
-     authentication:
-       path: auth/login
-       refresh: auth/refresh
-       register: "auth/registe
+    authentication:
+     path: auth/login
+     refresh: auth/refresh
+     register: auth/register"
