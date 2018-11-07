@@ -1,6 +1,10 @@
 package com.common.demo;
 
 public class LoginUser {
+
+    String username;
+    String password;
+
     public String getUsername() {
         return username;
     }
@@ -17,6 +21,4 @@ public class LoginUser {
         this.password = password;
     }
 
-    String username;
-    String password;
 }

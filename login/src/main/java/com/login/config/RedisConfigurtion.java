@@ -1,12 +1,12 @@
 package com.login.config;//package com.text.config;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 public class RedisConfigurtion {

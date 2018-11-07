@@ -3,8 +3,8 @@ package com.login.security;
 
 import com.common.demo.ApiCode;
 import com.common.demo.Result;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.login.fiter.JwtAuthenticationTokenFilter;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
+import org.springframework.web.cors.CorsUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +65,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
+    @Autowired
+    UserDetailsService detailsService;
     @Autowired
     MyAuthenticationSuccessHandler successHandler;
     @Autowired
@@ -77,8 +80,11 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 .failureHandler(failHandler)
                 .and()
                 .authorizeRequests()
+                //解决跨域问题
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 // 定义哪些URL需要被保护、哪些不需要被保护
-                .antMatchers("/authentication/logins","/error").permitAll()     // 设置所有人都可以访问登录页面
+                .antMatchers("/authentication/**","/error","/sendPhoneCode/**","/text").permitAll()     // 设置所有人都可以访问登录页面
+                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger-resources/configuration/ui","/swagge‌​r-ui.html").permitAll()
                 .anyRequest()// 任何请求,登录后可以访问
                 .authenticated()
                 .and()
@@ -94,6 +100,11 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 
     }
 
+
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(detailsService).passwordEncoder(passwordEncoder());
+
+    }
 
 
     /**
@@ -124,7 +135,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 response.getWriter().write(objectMapper.writeValueAsString(Result.newFailure("当前未登陆或未有该权限访问")));
                 return;
             }
-            if ("坏的凭证".equals(authException.getMessage())){
+            if ("坏的凭证".equals(authException.getMessage())||"Bad credentials".equals(authException.getMessage())){
                 response.getWriter().write(objectMapper.writeValueAsString(Result.newFailure("账号或密码出错")));
                 return;
             }

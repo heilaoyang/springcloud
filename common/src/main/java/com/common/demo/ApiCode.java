@@ -3,12 +3,12 @@ package com.common.demo;
 public enum ApiCode {
     Public_SUCCESSFULLY(200) {
         public String getMessage() {
-            return "调用接口成功!";
+            return "服务器成功返回请求数据!";
         }
     },
     Public_Error(400) {
         public String getMessage() {
-            return "调用接口失败!";
+            return "发出的请求有误,请求失败";
         }
     },
     USERNAME_OR_PASSWORD_ERROR(8000) {
@@ -75,6 +75,11 @@ public enum ApiCode {
     LOGOUT_SUCCESSFULLY(8014) {
         public String getMessage() {
             return "退出成功";
+        }
+    },
+    UN_REGISTERED(8015) {
+        public String getMessage() {
+            return "该账户未注册";
         }
     };
 

@@ -2,17 +2,25 @@ package com.login.demo;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 
 public class SecurityUser extends User implements Serializable {
 
+    @Override
+    public String toString() {
+        return super.toString()+"SecurityUser{" +
+                "userId=" + userId +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                '}';
+    }
 
+    private Integer userId;
     private Date lastPasswordResetDate;
+
+
     public SecurityUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
@@ -25,6 +33,13 @@ public class SecurityUser extends User implements Serializable {
     }
     public void setAuthorities(Collection<GrantedAuthority> authoritiesset) {
         getAuthorities().add(authoritiesset.iterator().next());
+    }
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
 }

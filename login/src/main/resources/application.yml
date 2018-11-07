@@ -79,7 +79,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 server:
-  port: 8001
+  port: 9000
 security:
   basic:
     enabled: false
@@ -95,3 +95,8 @@ jwt:
      path: auth/login
      refresh: auth/refresh
      register: auth/register"
+
+sms:
+   expiration: 180
+logging:
+  path: D:\java\log

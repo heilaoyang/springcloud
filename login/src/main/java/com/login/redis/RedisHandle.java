@@ -3,16 +3,16 @@ package com.login.redis;//package com.text.redis;
 import com.login.redis.interfac.BaseRedisDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
-import javax.annotation.Resource;
 
 @Repository("redisHandle")
 public class RedisHandle implements BaseRedisDao<String, Object> {

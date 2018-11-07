@@ -30,10 +30,12 @@ public class JsonToObject {
             String roles = StringUtils.substring(string, string.lastIndexOf("ROLE"), string.lastIndexOf("\""));
             set.add(new SimpleGrantedAuthority(roles));
         }
-        SecurityUser securityUser = new SecurityUser(jsonObject.getString("username"), jsonObject.getString("password"),set);
+        SecurityUser securityUser = new SecurityUser(jsonObject.getString("username"), "secreted",set);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(Long.parseLong(jsonObject.getString("lastPasswordResetDate")));
         securityUser.setLastPasswordResetDate(date);
+        Integer userID = (Integer) jsonObject.get("userId");
+        securityUser.setUserId(userID);
         return securityUser;
     }
     public static void main(String args[]) throws ParseException {

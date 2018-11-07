@@ -1,33 +1,26 @@
 package com.login.fiter;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Set;
-import javax.jws.soap.SOAPBinding;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.common.utlis.JsonUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.login.demo.SecurityUser;
 import com.login.redis.RedisHandle;
 import com.login.utlis.JsonToObject;
 import com.login.utlis.JwtTokenUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.ParseException;
 
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
