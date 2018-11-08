@@ -48,7 +48,7 @@ import java.util.regex.Pattern;
 @RestController
 @Slf4j
 @EnableAutoConfiguration
-@Api(value = "登录模块接口",description = "登录,注册,验证码等接口")
+@Api(value = "登录模块接口",description = "登录,注册,验证码等接口,请求统一需携带Authorization请求头带上token令牌")
 public class LoginController {
 
 
@@ -168,7 +168,7 @@ public class LoginController {
 
 
     @ApiOperation(value = "获取用户信息")
-    @GetMapping("/getUserDetails")
+    @GetMapping("/user/getDetails")
     public Result getUserDetails(){
         SecurityUser principal = (SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TbMasPatient user = doctorService.selectById(principal.getUserId());
