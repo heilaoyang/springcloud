@@ -1,0 +1,19 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: whalemed-user-server
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: whalemed-config-server
+    consul:
+      host: 192.168.1.110
+      port: 8500
+      discovery:
+        instance-id: whalemed-user-server
+        hostname: 192.168.1.110
+        health-check-path: /health
+        health-check-interval: 15s
+

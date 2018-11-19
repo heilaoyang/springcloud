@@ -1,0 +1,21 @@
+server:
+  port: 8004
+spring:
+  application:
+    name: whalemed-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://gitlab.bw-ai.com:888/837466137/configs.git
+          username: 837466137@qq.com
+          password: a66666666
+          search-paths: /**
+      label: master
+    consul:
+      host: 192.168.1.110
+      port: 8500
+      discovery:
+        instance-id: whalemed-config-server
+        hostname: 192.168.1.110
+

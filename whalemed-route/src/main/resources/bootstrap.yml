@@ -1,0 +1,24 @@
+server:
+  port: 8003
+spring:
+  application:
+    name: whalemed-route
+  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: whalemed-config-server
+    consul:
+      host: 192.168.1.110
+      port: 8500
+      discovery:
+        instance-id: whalemed-route
+        hostname: 192.168.1.110
+zuul:
+  routes:
+    user-pai:
+       path: /user/**
+       serviceId: whalemed-user-api
+  host:
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
