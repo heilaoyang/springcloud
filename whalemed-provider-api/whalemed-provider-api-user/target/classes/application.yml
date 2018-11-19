@@ -1,0 +1,34 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: whalemed-user-api
+  cloud:
+    consul:
+      host: 192.168.1.110
+      port: 8500
+      discovery:
+        instance-id: whalemed-user-api
+        register: true
+        hostname: 192.168.1.110
+      enabled: true
+
+jwt:
+   secret: mySecret
+   expiration: 259200
+   tokenHead: Bearer
+   header: Authorization
+   route:
+    authentication:
+     path: auth/login
+     refresh: auth/refresh
+     register: auth/register
+hystrix:
+  metrics:
+    polling-interval-ms: 2000
+    enabled: true
+
+feign.hystrix.enabled: true
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 3000 #1000毫秒
+
+
