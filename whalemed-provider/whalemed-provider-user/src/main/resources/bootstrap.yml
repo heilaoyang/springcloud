@@ -8,12 +8,34 @@ spring:
       discovery:
         enabled: true
         service-id: whalemed-config-server
+      retry:
+        max-interval: 2000
+        initial-interval: 1000
+        max-attempts: 6
+        multiplier: 1.1
+      fail-fast: true
     consul:
       host: 192.168.1.110
       port: 8500
       discovery:
-        instance-id: whalemed-user-server
+        instance-id: whalemed-user-server-1
         hostname: 192.168.1.110
         health-check-path: /health
         health-check-interval: 15s
+    stream:
+      kafka:
+        binder:
+          brokers: 114.116.48.132:9092
+          defaultBrokerPort: 9092
+          defaultZkPort: 2181
+          zk-nodes: 114.116.48.132:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
+management:
+  security:
+    enabled: false
 
+spring.cloud.bus.enabled: true
+spring.cloud.bus.trace.enabled: true
+management.endpoints.web.exposure.include: bus-refresh

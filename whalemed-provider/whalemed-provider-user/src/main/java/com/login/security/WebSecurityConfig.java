@@ -83,7 +83,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 //解决跨域问题
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 // 定义哪些URL需要被保护、哪些不需要被保护
-                .antMatchers("/authentication/**","/error","/sendPhoneCode/**","/text","/health","/actuator/**").permitAll()     // 设置所有人都可以访问登录页面
+                .antMatchers("/authentication/**","/refresh","/bus/**","/error","/sendPhoneCode/**","/text","/health","/actuator/**").permitAll()     // 设置所有人都可以访问登录页面
                 .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger-resources/configuration/ui","/swagge‌​r-ui.html").permitAll()
                 .anyRequest()// 任何请求,登录后可以访问
                 .authenticated()

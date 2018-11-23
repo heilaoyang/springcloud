@@ -22,6 +22,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,12 +49,15 @@ import java.util.regex.Pattern;
 @RestController
 @Slf4j
 @EnableAutoConfiguration
+@RefreshScope
 @Api(value = "登录模块接口",description = "登录,注册,验证码等接口,请求统一需携带Authorization请求头带上token令牌")
 public class LoginController {
 
 
     @Autowired
     DefaultKaptcha defaultKaptcha;
+    @Value("${text.ceshi}")
+    public String ceshi;
 
     @Autowired
     TbMasDoctorService doctorService;
@@ -181,7 +185,7 @@ public class LoginController {
     //健康检查的实现REST部分
     @RequestMapping("/health")
     public String health() {
-        return "hello health ";
+        return "hello health "+ceshi;
     }
 
 

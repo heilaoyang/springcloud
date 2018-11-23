@@ -12,10 +12,26 @@ spring:
           password: a66666666
           search-paths: /**
       label: master
+#      retry:
+#        max-attempts: 6
+#        initial-interval: 1000
+#        multiplier: 1.1
+#        max-interval: 2000
     consul:
       host: 192.168.1.110
       port: 8500
       discovery:
         instance-id: whalemed-config-server
         hostname: 192.168.1.110
+    stream:
+      kafka:
+        binder:
+          brokers: 114.116.48.132:9092
+          defaultBrokerPort: 9092
+          defaultZkPort: 2181
+          zk-nodes: 114.116.48.132:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
+      default-binder: kafka
 
