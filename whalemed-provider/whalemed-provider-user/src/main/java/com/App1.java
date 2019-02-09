@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableCaching
 @EnableSwagger2
 @EnableDiscoveryClient
-//@RefreshScope
+@RefreshScope
 public class App1 {
 
 	public static void main(String[] args) {
